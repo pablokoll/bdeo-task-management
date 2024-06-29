@@ -4,6 +4,6 @@ services:
   mongodb:
     image: mongo:latest
     environment:
-      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_DATABASE=${DATABASE_NAME}
     ports:
       - 27017:27017
