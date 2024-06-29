@@ -1,12 +1,13 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Put,
 } from '@nestjs/common';
+import { ValidObjectIdPipe } from '../common/pipes/valid-objectid.pipe';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './schemas/task.schema';
@@ -27,20 +28,24 @@ export class TasksController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Task> {
+  async findOne(
+    @Param('id', new ValidObjectIdPipe()) id: string,
+  ): Promise<Task> {
     return this.tasksService.findOne(id);
   }
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', new ValidObjectIdPipe()) id: string,
     @Body() updateTaskDto: UpdateTaskDto,
   ): Promise<Task> {
     return this.tasksService.update(id, updateTaskDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<Task> {
+  async remove(
+    @Param('id', new ValidObjectIdPipe()) id: string,
+  ): Promise<Task> {
     return this.tasksService.remove(id);
   }
 }

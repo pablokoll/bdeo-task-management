@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { throwNotFoundException } from '../utils/not-found.exception';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { Task } from './schemas/task.schema';
+import { Task, TaskStatus } from './schemas/task.schema';
 
 @Injectable()
 export class TasksService {
@@ -21,7 +21,7 @@ export class TasksService {
   }
 
   async findOne(id: string): Promise<Task> {
-    const task = this.taskModel.findOne({ _id: id }).exec();
+    const task = await this.taskModel.findOne({ _id: id }).exec();
     if (!task) {
       throwNotFoundException(Task.name, id);
     }
@@ -29,14 +29,21 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
+    const task = await this.findOne(id);
+
+    if (updateTaskDto.title) {
+      this.validateEditTitle(task, updateTaskDto);
+    }
+
+    if (updateTaskDto.status) {
+      this.validateStatusTransitions(task, updateTaskDto);
+    }
+
     const updatedTask = await this.taskModel.findByIdAndUpdate(
       id,
       updateTaskDto,
       { new: true },
     );
-    if (!updatedTask) {
-      throwNotFoundException(Task.name, id);
-    }
     return updatedTask;
   }
 
@@ -46,5 +53,39 @@ export class TasksService {
       throwNotFoundException(Task.name, id);
     }
     return deletedTask;
+  }
+
+  validateEditTitle(task: Task, updateTask: UpdateTaskDto): void {
+    if (updateTask.status !== TaskStatus.TO_DO) {
+      throw new UnprocessableEntityException(
+        'Title can only be edited when task is in "to-do" status',
+      );
+    }
+
+    if (task.title === updateTask.title) {
+      throw new UnprocessableEntityException(
+        'New title must be different from current title',
+      );
+    }
+  }
+
+  validateStatusTransitions(task: Task, updateTask: UpdateTaskDto): void {
+    if (task.status === updateTask.status) {
+      throw new UnprocessableEntityException(
+        'New status must be different from current status',
+      );
+    }
+    const tasksStatusNames: string[] = Object.keys(TaskStatus);
+    const currentStatus = tasksStatusNames.indexOf(
+      task.status.toLocaleUpperCase(),
+    );
+    const newStatus = tasksStatusNames.indexOf(
+      updateTask.status.toLocaleUpperCase(),
+    );
+    if (newStatus < currentStatus) {
+      throw new UnprocessableEntityException(
+        `Invalid state transition: Changing from ${task.status} to ${updateTask.status} is not permitted.`,
+      );
+    }
   }
 }

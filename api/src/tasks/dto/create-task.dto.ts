@@ -1,5 +1,4 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { TaskStatus } from '../schemas/task.schema';
+import { IsString } from 'class-validator';
 
 export class CreateTaskDto {
   @IsString()
@@ -7,8 +6,4 @@ export class CreateTaskDto {
 
   @IsString()
   description: string;
-
-  @IsEnum(TaskStatus)
-  @IsOptional()
-  status?: TaskStatus = TaskStatus.TO_DO;
 }
