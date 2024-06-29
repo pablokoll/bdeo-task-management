@@ -1,4 +1,4 @@
-import { Test, type TestingModule } from '@nestjs/testng';
+import { Test, type TestingModule } from '@nestjs/testing';
 import { TasksController } from '../../src/tasks/tasks.controller';
 
 describe('TasksController', () => {
