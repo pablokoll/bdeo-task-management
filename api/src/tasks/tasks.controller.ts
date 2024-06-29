@@ -1,12 +1,13 @@
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    Post,
-    Put,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
 } from '@nestjs/common';
+import { NotEmptyObjectPipe } from '../common/pipes/not-empty-objetc.pipe';
 import { ValidObjectIdPipe } from '../common/pipes/valid-objectid.pipe';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -37,7 +38,7 @@ export class TasksController {
   @Put(':id')
   async update(
     @Param('id', new ValidObjectIdPipe()) id: string,
-    @Body() updateTaskDto: UpdateTaskDto,
+    @Body(new NotEmptyObjectPipe()) updateTaskDto: UpdateTaskDto,
   ): Promise<Task> {
     return this.tasksService.update(id, updateTaskDto);
   }

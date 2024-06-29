@@ -56,7 +56,7 @@ export class TasksService {
   }
 
   validateEditTitle(task: Task, updateTask: UpdateTaskDto): void {
-    if (updateTask.status !== TaskStatus.TO_DO) {
+    if (task.status !== TaskStatus['TO-DO']) {
       throw new UnprocessableEntityException(
         'Title can only be edited when task is in "to-do" status',
       );
@@ -70,11 +70,18 @@ export class TasksService {
   }
 
   validateStatusTransitions(task: Task, updateTask: UpdateTaskDto): void {
+    if (task.status === TaskStatus.DONE) {
+      throw new UnprocessableEntityException(
+        'Cannot edit a task that is already done',
+      );
+    }
+
     if (task.status === updateTask.status) {
       throw new UnprocessableEntityException(
         'New status must be different from current status',
       );
     }
+
     const tasksStatusNames: string[] = Object.keys(TaskStatus);
     const currentStatus = tasksStatusNames.indexOf(
       task.status.toLocaleUpperCase(),
@@ -82,7 +89,7 @@ export class TasksService {
     const newStatus = tasksStatusNames.indexOf(
       updateTask.status.toLocaleUpperCase(),
     );
-    if (newStatus < currentStatus) {
+    if (newStatus > currentStatus + 1 || newStatus < currentStatus) {
       throw new UnprocessableEntityException(
         `Invalid state transition: Changing from ${task.status} to ${updateTask.status} is not permitted.`,
       );
