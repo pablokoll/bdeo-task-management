@@ -31,12 +31,6 @@ For data storage, MongoDB is used, with a well-defined schema for the tasks coll
 
 ## Installation
 
-### Clone the Repository
-```bash
-git clone https://github.com/your-username/your-project.git
-cd your-project
-```
-
 ### Install dependencies
 ```bash
 npm install
