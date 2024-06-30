@@ -32,66 +32,76 @@ describe('Tasks', () => {
     await tasksService.seed();
   });
 
-  it(`/tasks (GET)`, async () => {
-    const response = await request(app.getHttpServer()).get('/tasks');
+  describe('GET', () => {
+    it(`/tasks (GET)`, async () => {
+      const response = await request(app.getHttpServer()).get('/tasks');
 
-    expect(response.status).toBe(200);
-    expect(response.body[0]).toMatchObject(tasksList[0]);
-    expect(response.body.length).toBe(tasksList.length);
-    expect(Array.isArray(response.body)).toBeTruthy();
+      expect(response.status).toBe(200);
+      expect(response.body[0]).toMatchObject(tasksList[0]);
+      expect(response.body.length).toBe(tasksList.length);
+      expect(Array.isArray(response.body)).toBeTruthy();
+    });
+
+    it('/tasks/:id (GET)', async () => {
+      const taskCreated = await tasksService.create(mockCreateTaskDto);
+      const taskId = taskCreated._id.toString();
+
+      const response = await request(app.getHttpServer()).get(
+        `/tasks/${taskId}`,
+      );
+
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty('_id', taskId);
+    });
   });
 
-  it('/tasks/:id (GET)', async () => {
-    const taskCreated = await tasksService.create(mockCreateTaskDto);
-    const taskId = taskCreated._id.toString();
+  describe('POST', () => {
+    it('/tasks (POST)', async () => {
+      const createTaskDto = mockCreateTaskDto;
 
-    const response = await request(app.getHttpServer()).get(`/tasks/${taskId}`);
+      const response = await request(app.getHttpServer())
+        .post('/tasks')
+        .send(createTaskDto);
 
-    expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('_id', taskId);
+      expect(response.status).toBe(201);
+      expect(response.body).toHaveProperty('_id');
+      expect(response.body.title).toEqual(createTaskDto.title);
+      expect(response.body.description).toEqual(createTaskDto.description);
+      expect(response.body.status).toEqual(TaskStatus['TO-DO']);
+    });
   });
 
-  it('/tasks (POST)', async () => {
-    const createTaskDto = mockCreateTaskDto;
+  describe('PUT', () => {
+    it('/tasks/:id (PUT)', async () => {
+      const taskCreated = await tasksService.create(mockCreateTaskDto);
+      const taskId = taskCreated._id.toString();
 
-    const response = await request(app.getHttpServer())
-      .post('/tasks')
-      .send(createTaskDto);
+      const updateTaskDto: UpdateTaskDto = {
+        title: generateRandomTaskTitle(),
+      };
 
-    expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty('_id');
-    expect(response.body.title).toEqual(createTaskDto.title);
-    expect(response.body.description).toEqual(createTaskDto.description);
-    expect(response.body.status).toEqual(TaskStatus['TO-DO']);
+      const response = await request(app.getHttpServer())
+        .put(`/tasks/${taskId}`)
+        .send(updateTaskDto);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty('_id', taskId);
+      expect(response.body.title).toEqual(updateTaskDto.title);
+    });
   });
 
-  it('/tasks/:id (PUT)', async () => {
-    const taskCreated = await tasksService.create(mockCreateTaskDto);
-    const taskId = taskCreated._id.toString();
+  describe('DELETE', () => {
+    it('/tasks/:id (DELETE)', async () => {
+      const taskCreated = await tasksService.create(mockCreateTaskDto);
+      const taskId = taskCreated._id.toString();
 
-    const updateTaskDto: UpdateTaskDto = {
-      title: generateRandomTaskTitle(),
-    };
+      const response = await request(app.getHttpServer()).delete(
+        `/tasks/${taskId}`,
+      );
 
-    const response = await request(app.getHttpServer())
-      .put(`/tasks/${taskId}`)
-      .send(updateTaskDto);
-
-    expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('_id', taskId);
-    expect(response.body.title).toEqual(updateTaskDto.title);
-  });
-
-  it('/tasks/:id (DELETE)', async () => {
-    const taskCreated = await tasksService.create(mockCreateTaskDto);
-    const taskId = taskCreated._id.toString();
-
-    const response = await request(app.getHttpServer()).delete(
-      `/tasks/${taskId}`,
-    );
-
-    expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('_id', taskId);
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty('_id', taskId);
+    });
   });
 
   afterAll(async () => {
