@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-task-status-list',
   standalone: true,
-  imports: [],
+  imports: [TaskComponent],
   templateUrl: './task-status-list.component.html',
-  styleUrl: './task-status-list.component.css'
 })
 export class TaskStatusListComponent {
-
+  @Input() statusName = '';
 }
