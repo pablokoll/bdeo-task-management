@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<section>
+    <button (click)="openCreateTaskPopup()">Create Task</button>
+    <app-create-task *ngIf="showPopupCreateTask" (taskCreated)="onTaskCreated($event)" (closePopup)="onClosePopup()" />
+    <div>
+        @for(state of status; track state.index ){
+        <app-task-status-list statusName={{state.status}}/>
+        }
+    </div>
+</section>
