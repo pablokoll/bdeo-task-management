@@ -3,9 +3,9 @@ version: "3"
 services:
   mongodb:
     image: mongo:latest
-    container_name: nestjs_mongo
+    container_name: nestjs_mongo_testing
     environment:
-      - MONGODB_DATABASE=${DATABASE_NAME}
+      - MONGODB_DATABASE=${DATABASE_NAME_TESTING}
     ports:
       - 27017:27017
     volumes:

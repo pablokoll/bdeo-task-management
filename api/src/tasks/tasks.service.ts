@@ -1,6 +1,7 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import * as tasksJson from '../common/data/tasks.json';
 import { throwNotFoundException } from '../utils/not-found.exception';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -39,11 +40,9 @@ export class TasksService {
       this.validateStatusTransitions(task, updateTaskDto);
     }
 
-    const updatedTask = await this.taskModel.findByIdAndUpdate(
-      id,
-      updateTaskDto,
-      { new: true },
-    );
+    const updatedTask = await this.taskModel
+      .findByIdAndUpdate(id, updateTaskDto, { new: true })
+      .exec();
     return updatedTask;
   }
 
@@ -94,5 +93,9 @@ export class TasksService {
         `Invalid state transition: Changing from ${task.status} to ${updateTask.status} is not permitted.`,
       );
     }
+  }
+
+  async seed(): Promise<void> {
+    await this.taskModel.insertMany(tasksJson);
   }
 }

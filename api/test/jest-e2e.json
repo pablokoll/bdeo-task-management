@@ -5,5 +5,24 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
-  }
+  },
+  "setupFiles": [
+    "./set-env-variables.ts"
+  ],
+  "preset": "ts-jest",
+  "verbose": true,
+  "displayName": {
+    "name": "BDEO TASKS E2E",
+    "color": "blueBright"
+  },
+  "maxConcurrency": 1,
+  "maxWorkers": 1,
+  "modulePaths": ["node_modules", "<rootDir>"],
+  "coverageDirectory": "../../coverage",
+  "coveragePathIgnorePatterns": [".module.ts"],
+  "collectCoverage": false,
+  "forceExit": true,
+  "logHeapUsage": true,
+  "testTimeout": 30000,
+  "detectOpenHandles": true
 }

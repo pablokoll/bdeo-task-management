@@ -19,5 +19,7 @@ const config: Config.InitialOptions = {
   forceExit: true,
   logHeapUsage: true,
   testTimeout: 30000,
+  detectOpenHandles: true,
 };
+
 export default config;

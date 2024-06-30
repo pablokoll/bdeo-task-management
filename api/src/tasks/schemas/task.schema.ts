@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { PartialType } from '@nestjs/swagger';
+import { Document, HydratedDocument } from 'mongoose';
 
 export type TaskDocument = HydratedDocument<Task>;
 
@@ -10,7 +11,7 @@ export enum TaskStatus {
 }
 
 @Schema()
-export class Task {
+export class Task extends PartialType(Document) {
   @Prop({ required: true })
   title: string;
 

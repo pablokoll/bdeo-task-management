@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { NotEmptyObjectPipe } from '../common/pipes/not-empty-objetc.pipe';
+import { NotEmptyObjectPipe } from '../common/pipes/not-empty-object.pipe';
 import { ValidObjectIdPipe } from '../common/pipes/valid-objectid.pipe';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
