@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Task } from '../models/task.model';
 import { CreateTaskDto } from '../shared/dto/create-task.dto';
 import { UpdateTaskDto } from '../shared/dto/update-task.dto';
@@ -10,7 +11,7 @@ import { TasksLists } from '../shared/types/tasks-lists';
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:5000/tasks';
+  private apiUrl = environment.apiUrl;
   private tasksSubject = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasksSubject.asObservable();
 
