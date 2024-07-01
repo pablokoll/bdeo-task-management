@@ -50,6 +50,19 @@ export class TaskService {
           (value) => value._id === id
         );
         this.tasksSubject.value[indexTask] = updateTask;
+        this.tasksSubject.next(this.tasksSubject.value);
+      })
+    );
+  }
+
+  deleteTask(id: string): Observable<Task> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<Task>(url).pipe(
+      tap(() => {
+        const tasksFiltered = this.tasksSubject.value.filter(
+          (value) => value._id !== id
+        );
+        this.tasksSubject.next(tasksFiltered);
       })
     );
   }

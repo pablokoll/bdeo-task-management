@@ -15,6 +15,6 @@ export class TaskStatusListComponent {
   @Input() tasks: Task[] = [];
 
   titleParser(title: string): string {
-    return statusTitleParser(title)
+    return statusTitleParser(title);
   }
 }

@@ -3,16 +3,17 @@ import { FormsModule } from '@angular/forms';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { UpdateTaskDto } from '../../shared/dto/update-task.dto';
+import { TaskStatus } from '../../shared/enum/task-status.enum';
+import { TaskActionsDropdownComponent } from '../task-actions-dropdown/task-actions-dropdown.component';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TaskActionsDropdownComponent],
   templateUrl: './task.component.html',
 })
 export class TaskComponent {
   constructor(private taskService: TaskService) {}
-
   @Input() task!: Task;
   titleEdit: string = '';
   isEditing: boolean = false;
@@ -22,7 +23,7 @@ export class TaskComponent {
     this.titleEdit = this.task.title;
   }
 
-  saveTitle() {
+  updateTaskTitle() {
     if (this.isEditing && this.titleEdit) {
       if (
         this.titleEdit.toLocaleLowerCase() ===
@@ -37,5 +38,19 @@ export class TaskComponent {
       this.task.title = this.titleEdit;
       this.isEditing = false;
     }
+  }
+
+  updateTaskStatus(task: Task) {
+    const taskId = task._id;
+    const newStatus =
+      task.status === TaskStatus['TO-DO']
+        ? TaskStatus['IN-PROGRESS']
+        : TaskStatus.DONE;
+    const updateTaskDto = new UpdateTaskDto(undefined, newStatus);
+    this.taskService.updateTask(taskId, updateTaskDto).subscribe();
+  }
+
+  deleteTask(task: Task) {
+    this.taskService.deleteTask(task._id).subscribe();
   }
 }

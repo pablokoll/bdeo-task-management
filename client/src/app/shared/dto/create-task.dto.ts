@@ -1,4 +1,3 @@
 export class CreateTaskDto {
-  title!: string;
-  description!: string;
+  constructor(public title: string, public description: string) {}
 }

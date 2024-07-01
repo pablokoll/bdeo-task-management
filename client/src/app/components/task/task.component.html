@@ -1,11 +1,7 @@
 <article class="border border-gray-200 bg-white rounded-xl shadow-md p-4 relative">
-    <div class="w-1/3 h-[5px] absolute rounded-3xl {{task.status === 'to-do' ? 'bg-blue-300' : task.status === 'in-progress' ? '
-        bg-yellow-300' : 'bg-green-400' }}"></div>
-    <button class="top-2 right-1 absolute"><svg fill="#234057" class="h-5 w-5" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"
-            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="m12 16.495c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25zm0-6.75c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25zm0-6.75c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25z" />
-        </svg></button>
+    <div class="w-1/3 h-[5px] absolute rounded-3xl {{task.status === 'to-do' ? 'bg-blue-200' : task.status === 'in-progress' ? '
+        bg-yellow-200' : 'bg-green-200' }}"></div>
+    <app-task-actions-dropdown [task]="task" [updateTask]="updateTaskStatus" [deleteTask]="deleteTask" />
     <div class="flex justify-between place-content-center items-center mt-2">
         @if(task.status === 'to-do'){
         @if(!isEditing){
@@ -15,7 +11,7 @@
         </h3>
         }@else{
         <input [(ngModel)]="titleEdit" class="text-lg text-wrap font-semibold text-curious-blue-900 mt-3"
-            (blur)="saveTitle()" (keyup.enter)="saveTitle()" autofocus />
+            (blur)="updateTaskTitle()" (keyup.enter)="updateTaskTitle()" autofocus />
         }
         }@else {
         <h3 class="text-lg text-wrap font-semibold text-curious-blue-900 mt-3">
