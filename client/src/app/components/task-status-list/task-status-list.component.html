@@ -1,13 +1,13 @@
-<section class="flex flex-col mb-5">
-    <h2 class="text-xl font-bold mb-4 sm:text-2xl md:text-3xl overflow-hidden">{{titleParser(statusName)}}</h2>
+<section class="flex flex-col mb-5 overflow-hidden">
+    <h2 class="text-xl font-bold mb-4 md:mb-6 sm:text-2xl overflow-hidden">{{titleParser(statusName)}}</h2>
     <div class="grid gap-5 sm:gap-10">
         @if(tasks.length){
         @for(task of tasks; track task._id){
         <app-task [task]="task" />
-        }
+        }   
         }@else{
         <div>
-            <p class="sm:text-xl">Empty list.</p>
+            <p class="sm:text-xl">Empty list.</p>   
         </div>
 
         }

@@ -27,7 +27,7 @@ export class TaskComponent {
     if (this.isEditing && this.titleEdit) {
       if (
         this.titleEdit.toLocaleLowerCase() ===
-        this.task.title.toLocaleLowerCase()
+        this.task.title.toLocaleLowerCase() || this.titleEdit.length < 3 || this.titleEdit.length > 30
       ) {
         this.isEditing = false;
         return;
