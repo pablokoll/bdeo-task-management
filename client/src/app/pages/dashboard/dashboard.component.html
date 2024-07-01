@@ -1,9 +1,19 @@
-<section>
-    <button (click)="openCreateTaskPopup()">Create Task</button>
-    <app-create-task *ngIf="showPopupCreateTask" (taskCreated)="onTaskCreated($event)" (closePopup)="onClosePopup()" />
-    <div>
-        @for(state of status; track state.index ){
-        <app-task-status-list statusName={{state.status}}/>
+<section class="flex flex-col justify-center p-10 lg:p-16">
+    <button class="self-end text-2xl font-semibold rounded-md" (click)="
+        openCreateTaskPopup()">
+        <svg class="h-10 w-10" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1" viewBox="0 0 24 24"
+            fill="#17293a" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" />
+        </svg>
+    </button>
+    <div class="{{showPopupCreateTask ? 'absolute w-full top-0 h-full bg-opacity-50 backdrop-blur-sm z-10' : 'hidden'}}" (click)="onClosePopup()">
+    </div>
+    <app-create-task class="absolute z-50 top-20 left-8 bg-white w-4/5 rounded-xl shadow-md" *ngIf="showPopupCreateTask"
+        (taskCreated)="onTaskCreated($event)" (closePopup)="onClosePopup()" />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-screen-lg mt-4">
+        @for(status of statusList; track status.index ){
+        <app-task-status-list statusName={{status.name}} [tasks]="tasksLists[status.name.toLowerCase()]" />
         }
     </div>
 </section>

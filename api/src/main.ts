@@ -7,6 +7,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
 
+  app.enableCors({
+    origin: `*`,
+  });
+
   const options = new DocumentBuilder()
     .setTitle('BDEO Task Manager')
     .setDescription('The task manager API description')

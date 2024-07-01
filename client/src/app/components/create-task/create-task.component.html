@@ -1,25 +1,23 @@
-<div class="popup">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h4>Create Task</h4>
-        <button type="button" class="close" (click)="onCancel()">&times;</button>
-      </div>
-      <div class="popup-body">
-        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" id="title" formControlName="title" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" id="description" formControlName="description" class="form-control" required>
-          </div>
-          <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Save</button>
-        </form>
-      </div>
-      <div class="popup-footer">
-        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-      </div>
-    </div>
+<div class="p-8">
+  <div class="flex justify-between mb-2">
+    <h4 class="text-lg font-semibold">Create Task</h4>
+    <button type="button" class="text-lg" (click)="onCancel()">
+      <svg class="h-6 w-6" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z" />
+      </svg>
+    </button>
   </div>
-  
+  <form class="flex flex-col gap-3" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input class="px-1 border-[1px] rounded-md border-curious-blue-800 focus:outline-none focus:ring-curious-blue-700 focus:border-curious-blue-700" type="text" id="title" formControlName="title" required>
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <input class="px-1 border-[1px] rounded-md border-curious-blue-800 focus:outline-none focus:ring-curious-blue-700 focus:border-curious-blue-700" type="text" id="description" formControlName="description" required>
+    </div>
+    <button class="{{taskForm.invalid ? 'text-slate-300' : 'text-curious-blue-500'}}" type="submit" [disabled]="taskForm.invalid">Save</button>
+  </form>
+</div>

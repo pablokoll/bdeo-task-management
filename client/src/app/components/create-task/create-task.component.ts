@@ -11,7 +11,6 @@ import {
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './create-task.component.html',
-  styleUrl: './create-task.component.css',
 })
 export class CreateTaskComponent implements OnInit {
   ngOnInit(): void {}
