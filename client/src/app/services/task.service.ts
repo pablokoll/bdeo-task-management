@@ -11,7 +11,7 @@ import { TasksLists } from '../shared/types/tasks-lists';
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = `${environment.apiUrl}/tasks`;
   private tasksSubject = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasksSubject.asObservable();
 

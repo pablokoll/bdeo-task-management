@@ -3,5 +3,5 @@ import { Environment } from '../app/shared/dto/environment.dto';
 
 export const environment: Environment = {
   production: false,
-  apiUrl: `http://localhost:5000/tasks`,
+  apiUrl: `http://localhost:5000`,
 };
