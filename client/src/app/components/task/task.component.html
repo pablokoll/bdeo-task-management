@@ -10,8 +10,12 @@
             <button (click)="toggleEdit()" class="ml-2 text-sm md:text-base text-curious-blue-400">Edit</button>
         </h3>
         }@else{
-        <input [(ngModel)]="titleEdit" class="text-lg md:text-xl text-wrap font-semibold text-curious-blue-900 mt-3"
-            (blur)="updateTaskTitle()" (keyup.enter)="updateTaskTitle()" autofocus />
+        <form [formGroup]="titleForm" autocomplete="off">
+            <input type="text" id="editTitle" formControlName="editTitle" required
+                class="text-lg md:text-xl text-wrap font-semibold text-curious-blue-900 mt-3" (blur)="updateTaskTitle()"
+                (keyup.enter)="updateTaskTitle()" autofocus />
+            <app-input-error-validations [control]="titleForm.get('editTitle')" [touched]="false" />
+        </form>
         }
         }@else {
         <h3 class="text-lg md:text-xl text-wrap font-semibold text-curious-blue-900 mt-3">

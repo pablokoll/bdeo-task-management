@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import { CreateTaskDto } from '../../shared/dto/create-task.dto';
+import { InputErrorValidationsComponent } from '../input-error-validations/input-error-validations.component';
 
 @Component({
   selector: 'app-create-task',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputErrorValidationsComponent],
   templateUrl: './create-task.component.html',
 })
 export class CreateTaskComponent implements OnInit {
@@ -25,13 +26,13 @@ export class CreateTaskComponent implements OnInit {
   taskForm = new FormGroup({
     title: new FormControl('', [
       Validators.required,
-      Validators.min(3),
-      Validators.max(30),
+      Validators.minLength(3),
+      Validators.maxLength(30),
     ]),
     description: new FormControl('', [
       Validators.required,
-      Validators.min(5),
-      Validators.max(200),
+      Validators.minLength(5),
+      Validators.maxLength(200),
     ]),
   });
 

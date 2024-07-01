@@ -2,27 +2,29 @@
   <div class="flex justify-between mb-2">
     <h4 class="text-lg font-semibold md:text-xl">Create Task</h4>
     <button type="button" class="text-lg" (click)="onCancel()">
-      <svg class="h-6 w-6 md:h-8 md:w-8" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"
-        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg class="h-6 w-6 md:h-8 md:w-8" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round"
+        stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path
           d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z" />
       </svg>
     </button>
   </div>
-  <form class="flex flex-col gap-3" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <form autocomplete="off" class="flex flex-col gap-3" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <div class="flex flex-col">
       <label class="md:text-lg" for="title">Title</label>
       <input
         class="px-1 border-[1px] rounded-md border-curious-blue-800 focus:outline-none focus:ring-curious-blue-700 focus:border-curious-blue-700 md:px-2 md:py-0.5 md:text-lg"
         type="text" id="title" formControlName="title" required>
+      <app-input-error-validations [control]="taskForm.get('title')" />
     </div>
     <div class="flex flex-col">
       <label class="md:text-lg" for="description">Description</label>
       <input
         class="px-1 border-[1px] rounded-md border-curious-blue-800 focus:outline-none focus:ring-curious-blue-700 focus:border-curious-blue-700 md:px-2 md:py-0.5 md:text-lg"
         type="text" id="description" formControlName="description" required>
+      <app-input-error-validations [control]="taskForm.get('description')" />
     </div>
-    <button class="{{taskForm.invalid ? 'text-slate-300' : 'text-curious-blue-500'}}" type="submit"
+    <button class="{{taskForm.invalid ? 'text-slate-300' : 'text-curious-blue-500'}} mb-2" type="submit"
       [disabled]="taskForm.invalid">Save</button>
   </form>
 </div>
