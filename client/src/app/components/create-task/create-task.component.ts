@@ -5,6 +5,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { TaskService } from '../../services/task.service';
+import { CreateTaskDto } from '../../shared/dto/create-task.dto';
 
 @Component({
   selector: 'app-create-task',
@@ -13,6 +15,7 @@ import {
   templateUrl: './create-task.component.html',
 })
 export class CreateTaskComponent implements OnInit {
+  constructor(private taskService: TaskService) {}
   ngOnInit(): void {}
 
   @Output() formClosed = new EventEmitter<void>();
@@ -34,10 +37,22 @@ export class CreateTaskComponent implements OnInit {
 
   onSubmit(): void {
     if (this.taskForm.valid) {
+      this.createTask(this.taskForm.value as CreateTaskDto);
       this.taskCreated.emit(this.taskForm.value);
       this.onCancel();
       this.taskForm.reset();
     }
+  }
+
+  createTask(createTaskDto: CreateTaskDto): void {
+    this.taskService.createTask(createTaskDto).subscribe(
+      (response) => {
+        // console.log('Task created successfully:', response);
+      },
+      (error) => {
+        // console.error('Error creating task:', error);
+      }
+    );
   }
 
   onCancel(): void {

@@ -10,7 +10,7 @@
     <div class="{{showPopupCreateTask ? 'absolute w-full top-0 h-full bg-opacity-50 backdrop-blur-sm z-10' : 'hidden'}}" (click)="onClosePopup()">
     </div>
     <app-create-task class="absolute z-50 top-20 left-8 bg-white w-4/5 rounded-xl shadow-md" *ngIf="showPopupCreateTask"
-        (taskCreated)="onTaskCreated($event)" (closePopup)="onClosePopup()" />
+         (closePopup)="onClosePopup()" />
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-screen-lg mt-4">
         @for(status of statusList; track status.index ){
         <app-task-status-list statusName={{status.name}} [tasks]="tasksLists[status.name.toLowerCase()]" />

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Task } from '../models/task.model';
+import { CreateTaskDto } from '../shared/dto/create-task.dto';
 import { TasksLists } from '../shared/types/tasks-lists';
 
 @Injectable({
@@ -9,11 +10,15 @@ import { TasksLists } from '../shared/types/tasks-lists';
 })
 export class TaskService {
   private apiUrl = 'http://localhost:5000/tasks';
+  private tasksSubject = new BehaviorSubject<Task[]>([]);
+  tasks$ = this.tasksSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+  getTasks(): void {
+    this.http.get<Task[]>(this.apiUrl).subscribe((tasks) => {
+      this.tasksSubject.next(tasks);
+    });
   }
 
   assignTasks(tasks: Task[]): TasksLists {
@@ -26,5 +31,13 @@ export class TaskService {
       tasksLists[task.status].push(task);
     }
     return tasksLists;
+  }
+
+  createTask(createTaskDto: CreateTaskDto): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, createTaskDto).pipe(
+      tap((newTask) => {
+        this.tasksSubject.next([...this.tasksSubject.value, newTask]);
+      })
+    );
   }
 }

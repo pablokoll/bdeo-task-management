@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { CreateTaskComponent } from '../../components/create-task/create-task.component';
 import { TaskStatusListComponent } from '../../components/task-status-list/task-status-list.component';
 import { TaskService } from '../../services/task.service';
-import { CreateTaskDto } from '../../shared/dto/create-task.dto';
 import { TaskStatus } from '../../shared/enum/task-status.enum';
 import { StatusList } from '../../shared/types/status-list.type';
 import { TasksLists } from '../../shared/types/tasks-lists';
@@ -19,7 +18,7 @@ export class DashboardComponent implements OnInit {
   tasksLists: TasksLists = {
     'to-do': [],
     'in-progress': [],
-    'done': []
+    done: [],
   };
 
   constructor(private taskService: TaskService) {}
@@ -34,9 +33,11 @@ export class DashboardComponent implements OnInit {
   }
 
   loadTasks(): void {
-    this.taskService.getTasks().subscribe((tasks) => {
+    this.taskService.tasks$.subscribe((tasks) => {
       this.tasksLists = this.taskService.assignTasks(tasks);
     });
+
+    this.taskService.getTasks();
   }
   showPopupCreateTask = false;
 
@@ -44,10 +45,6 @@ export class DashboardComponent implements OnInit {
     this.showPopupCreateTask = true;
   }
   onClosePopup(): void {
-    this.showPopupCreateTask = false;
-  }
-  onTaskCreated(task: CreateTaskDto): void {
-    console.log('Task created:', task);
     this.showPopupCreateTask = false;
   }
 }

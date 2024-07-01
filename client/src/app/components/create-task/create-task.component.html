@@ -10,11 +10,11 @@
     </button>
   </div>
   <form class="flex flex-col gap-3" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <div>
+    <div class="flex flex-col">
       <label for="title">Title</label>
       <input class="px-1 border-[1px] rounded-md border-curious-blue-800 focus:outline-none focus:ring-curious-blue-700 focus:border-curious-blue-700" type="text" id="title" formControlName="title" required>
     </div>
-    <div>
+    <div class="flex flex-col">
       <label for="description">Description</label>
       <input class="px-1 border-[1px] rounded-md border-curious-blue-800 focus:outline-none focus:ring-curious-blue-700 focus:border-curious-blue-700" type="text" id="description" formControlName="description" required>
     </div>
