@@ -30,7 +30,8 @@ describe('CreateTaskComponent', () => {
   });
 
   afterEach(() => {
-    TestBed.resetTestingModule();
+    fixture.destroy();
+    taskServiceSpy.createTask.calls.reset();
   });
 
   it('should create the component', () => {
@@ -45,23 +46,27 @@ describe('CreateTaskComponent', () => {
   });
 
   it('should not emit taskCreated on invalid form submission', () => {
+    component.taskForm.setValue({
+      title: null,
+      description: null,
+    });
     spyOn(component.taskCreated, 'emit');
-    component.taskForm.setValue({ title: '', description: '' });
     component.onSubmit();
     expect(taskServiceSpy.createTask).not.toHaveBeenCalled();
     expect(component.taskCreated.emit).not.toHaveBeenCalled();
   });
 
   it('should emit taskCreated and reset form on valid form submission', () => {
-    taskServiceSpy.createTask.and.returnValue(of());
-
-    spyOn(component.taskCreated, 'emit');
-    spyOn(component, 'onCancel');
     const task = generateMockTask(TaskStatus['TO-DO']);
     component.taskForm.setValue({
       title: task.title,
       description: task.description,
     });
+
+    taskServiceSpy.createTask.and.returnValue(of());
+
+    spyOn(component.taskCreated, 'emit');
+    spyOn(component, 'onCancel');
     component.onSubmit();
 
     expect(taskServiceSpy.createTask).toHaveBeenCalledWith({

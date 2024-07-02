@@ -45,14 +45,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   createTask(createTaskDto: CreateTaskDto): void {
-    this.taskService.createTask(createTaskDto).subscribe(
-      (response) => {
-        // console.log('Task created successfully:', response);
-      },
-      (error) => {
-        // console.error('Error creating task:', error);
-      }
-    );
+    this.taskService.createTask(createTaskDto).subscribe();
   }
 
   onCancel(): void {

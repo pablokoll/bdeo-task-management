@@ -5,14 +5,14 @@ import { TaskStatus } from '../enum/task-status.enum';
 
 export const mockCreateTaskDto: CreateTaskDto = {
   title: generateRandomTaskTitle(),
-  description: faker.lorem.paragraph({ min: 2, max: 4 }),
+  description: faker.lorem.paragraph().slice(0, 199),
 };
 
 export function generateMockTask(status?: TaskStatus): Task {
   return {
     _id: generateRandomTaskId(),
     title: generateRandomTaskTitle(),
-    description: faker.lorem.paragraph({ min: 2, max: 4 }),
+    description: faker.lorem.paragraph().slice(0, 199),
     status: status ? status : faker.helpers.enumValue(TaskStatus),
     __v: 0,
   };
@@ -25,7 +25,7 @@ export function generateArrayMockTasks(): Task[] {
 }
 
 export function generateRandomTaskTitle(): string {
-  return faker.lorem.words({ min: 2, max: 3 });
+  return faker.company.name().slice(0, 20);
 }
 
 export function generateRandomTaskId(): string {
