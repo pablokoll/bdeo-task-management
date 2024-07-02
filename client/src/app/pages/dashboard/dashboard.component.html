@@ -2,7 +2,7 @@
     <button
         class="flex gap-2 items-center justify-center self-end text-2xl font-semibold rounded-md sm:hover:bg-curious-blue-50 sm:hover:border-1 sm:px-4 sm:py-2 sm:rounded-full"
         (click)="
-        openCreateTaskPopup()">
+        togglePopup()">
         <span class="hidden sm:block text-xl md:text-2xl font-semibold">Create Task</span>
         <svg fill="#234057" class="h-10 w-10" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1"
             viewBox="0 0 24 24" fill="#17293a" xmlns="http://www.w3.org/2000/svg">
@@ -11,11 +11,11 @@
         </svg>
     </button>
     <div class="{{showPopupCreateTask ? 'absolute w-full top-0 h-full bg-opacity-50 backdrop-blur-sm z-10' : 'hidden'}}"
-        (click)="onClosePopup()">
+        (click)="togglePopup()">
     </div>
     @if(showPopupCreateTask){
     <app-create-task class="overflow-hidden absolute z-50 top-20 left-8 md:left-16 lg:w-3/5 lg:h-72 lg:left-48 lg:top-30 xl:top-40 xl:left-60 2xl:left-96 bg-white w-4/5 rounded-xl shadow-md sm:shadow-2xl"
-        (closePopup)="onClosePopup()" />
+        (closePopup)="togglePopup()" />
     }
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-10 w-full max-w-screen-lg mt-4 sm:mt-8 place-self-center overflow-hidden">
         @for(status of statusList; track status.index ){

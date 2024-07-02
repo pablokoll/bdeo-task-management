@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     'in-progress': [],
     done: [],
   };
+  showPopupCreateTask = false;
 
   constructor(private taskService: TaskService) {}
   ngOnInit(): void {
@@ -39,12 +40,8 @@ export class DashboardComponent implements OnInit {
 
     this.taskService.getTasks();
   }
-  showPopupCreateTask = false;
 
-  openCreateTaskPopup(): void {
-    this.showPopupCreateTask = true;
-  }
-  onClosePopup(): void {
-    this.showPopupCreateTask = false;
+  togglePopup(): void {
+    this.showPopupCreateTask = !this.showPopupCreateTask;
   }
 }

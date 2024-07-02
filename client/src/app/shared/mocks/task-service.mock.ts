@@ -1,1 +1,1 @@
-export const providerTaskServiceMock = jasmine.createSpyObj('TaskService', ['getTasks', 'assignTasks', 'createTask', 'updateTask', 'deleteTask']);
+export const providerTaskServiceMock = jasmine.createSpyObj('TaskService', ['getTasks', 'assignTasks', 'createTask', 'updateTask', 'deleteTask', 'tasks$']);
