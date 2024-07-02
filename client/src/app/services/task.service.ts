@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { Task } from '../models/task.model';
 import { CreateTaskDto } from '../shared/dto/create-task.dto';
 import { UpdateTaskDto } from '../shared/dto/update-task.dto';
-import { TasksLists } from '../shared/interfaces/tasks-lists.interface';
+import { TasksLists } from '../shared/types/tasks-lists.type';
 
 @Injectable({
   providedIn: 'root',
