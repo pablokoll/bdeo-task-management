@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -23,10 +23,10 @@ import { TaskActionsDropdownComponent } from '../task-actions-dropdown/task-acti
   templateUrl: './task.component.html',
 })
 export class TaskComponent {
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private eRef: ElementRef) {}
   @Input() task!: Task;
   titleForm = new FormGroup({
-    editTitle: new FormControl(this.task?.title, [
+    editTitle: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30),
@@ -54,6 +54,13 @@ export class TaskComponent {
       const updateTaskDto = new UpdateTaskDto(this.titleForm.value.editTitle);
       this.taskService.updateTask(taskId, updateTaskDto).subscribe();
       this.task.title = this.titleForm.value.editTitle;
+      this.isEditing = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event): void {
+    if (!this.eRef.nativeElement.contains(event.target)) {
       this.isEditing = false;
     }
   }
