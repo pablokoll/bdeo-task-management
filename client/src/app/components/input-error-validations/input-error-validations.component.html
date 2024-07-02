@@ -1,0 +1,7 @@
+@if(control && control.invalid && control.touched || !touched ){
+<div>
+    @for(errorKey of errorKeys; track errorKeys.indexOf(errorKey)){
+    <p class="text-red-500 text-xs italic lg:text-sm">{{ getErrorMessage(errorKey) }}</p>
+    }
+</div>
+}

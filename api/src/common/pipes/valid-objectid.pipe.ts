@@ -1,4 +1,3 @@
-// valid-objectid.pipe.ts
 import { BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
 import { isValidObjectId } from 'mongoose';
 

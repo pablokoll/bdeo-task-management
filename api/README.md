@@ -1,4 +1,4 @@
-# BDEO Task Managment
+# BDEO Task Managment API (BACKEND)
 
 Simple task management application.
 
@@ -25,7 +25,7 @@ For data storage, MongoDB is used, with a well-defined schema for the tasks coll
 - Unit and e2e tests.
 
 ## Prerequisites
-- Node.js (version 22.2.0)
+- Node.js (version 14 or higher)
 - npm (version 10.7.0) or yarn (version 1.22.4)
 - Docker and Docker Compose (for MongoDB database)
 
