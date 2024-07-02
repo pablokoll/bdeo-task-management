@@ -13,7 +13,7 @@
         <form [formGroup]="titleForm" autocomplete="off">
             <input type="text" id="editTitle" formControlName="editTitle" required
                 class="text-lg md:text-xl text-wrap font-semibold text-curious-blue-900 mt-3" (blur)="updateTaskTitle()"
-                (keyup.enter)="updateTaskTitle()" autofocus />
+                (keyup.enter)="updateTaskTitle()" />
             <app-input-error-validations [control]="titleForm.get('editTitle')" [touched]="false" />
         </form>
         }

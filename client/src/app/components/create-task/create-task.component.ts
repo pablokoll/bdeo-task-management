@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -15,11 +15,10 @@ import { InputErrorValidationsComponent } from '../input-error-validations/input
   imports: [ReactiveFormsModule, InputErrorValidationsComponent],
   templateUrl: './create-task.component.html',
 })
-export class CreateTaskComponent implements OnInit {
+export class CreateTaskComponent {
   constructor(private taskService: TaskService) {}
-  ngOnInit(): void {}
 
-  @Output() taskCreated = new EventEmitter<any>();
+  @Output() taskCreated = new EventEmitter<CreateTaskDto>();
   @Output() closePopup = new EventEmitter<void>();
 
   taskForm = new FormGroup({
@@ -38,7 +37,7 @@ export class CreateTaskComponent implements OnInit {
   onSubmit(): void {
     if (this.taskForm.valid) {
       this.createTask(this.taskForm.value as CreateTaskDto);
-      this.taskCreated.emit(this.taskForm.value);
+      this.taskCreated.emit(this.taskForm.value as CreateTaskDto);
       this.onCancel();
       this.taskForm.reset();
     }

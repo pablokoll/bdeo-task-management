@@ -12,8 +12,8 @@ export class TaskActionsDropdownComponent {
   constructor(private taskService: TaskService, private eRef: ElementRef) {}
 
   @Input({ required: true }) task!: Task;
-  @Input({ required: true }) updateTask!: Function;
-  @Input({ required: true }) deleteTask!: Function;
+  @Input({ required: true }) updateTask!: (task: Task) => void;
+  @Input({ required: true }) deleteTask!: (task: Task) => void;
   isOpen = false;
 
   toggleDropdown(event: Event): void {

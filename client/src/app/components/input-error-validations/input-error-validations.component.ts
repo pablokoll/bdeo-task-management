@@ -16,7 +16,7 @@ export class InputErrorValidationsComponent {
   }
 
   getErrorMessage(errorKey: string): string {
-    const messages: { [key: string]: string } = {
+    const messages: Record<string, string> = {
       required: 'This field is required.',
       minlength: `Minimum length is ${
         this.control?.getError('minlength')?.requiredLength

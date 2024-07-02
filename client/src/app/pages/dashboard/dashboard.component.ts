@@ -4,8 +4,8 @@ import { CreateTaskComponent } from '../../components/create-task/create-task.co
 import { TaskStatusListComponent } from '../../components/task-status-list/task-status-list.component';
 import { TaskService } from '../../services/task.service';
 import { TaskStatus } from '../../shared/enum/task-status.enum';
-import { StatusList } from '../../shared/types/status-list.type';
-import { TasksLists } from '../../shared/types/tasks-lists';
+import { StatusList } from '../../shared/interfaces/status-list.interface';
+import { TasksLists } from '../../shared/interfaces/tasks-lists.interface';
 
 @Component({
   selector: 'app-dashboard',

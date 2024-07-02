@@ -10,14 +10,16 @@
                 d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" />
         </svg>
     </button>
-    <div class="{{showPopupCreateTask ? 'absolute w-full top-0 h-full bg-opacity-50 backdrop-blur-sm z-10' : 'hidden'}}"
+    <div aria-hidden="true" class="{{showPopupCreateTask ? 'absolute w-full top-0 h-full bg-opacity-50 backdrop-blur-sm z-10' : 'hidden'}}"
         (click)="togglePopup()">
     </div>
     @if(showPopupCreateTask){
-    <app-create-task class="overflow-hidden absolute z-50 top-20 left-8 md:left-16 lg:w-3/5 lg:h-72 lg:left-48 lg:top-30 xl:top-40 xl:left-60 2xl:left-96 bg-white w-4/5 rounded-xl shadow-md sm:shadow-2xl"
+    <app-create-task
+        class="overflow-hidden absolute z-50 top-20 left-8 md:left-16 lg:w-3/5 lg:h-72 lg:left-48 lg:top-30 xl:top-40 xl:left-60 2xl:left-96 bg-white w-4/5 rounded-xl shadow-md sm:shadow-2xl"
         (closePopup)="togglePopup()" />
     }
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-10 w-full max-w-screen-lg mt-4 sm:mt-8 place-self-center overflow-hidden">
+    <div
+        class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-10 w-full max-w-screen-lg mt-4 sm:mt-8 place-self-center overflow-hidden">
         @for(status of statusList; track status.index ){
         <app-task-status-list statusName={{status.name}} [tasks]="tasksLists[status.name.toLowerCase()]" />
         }

@@ -32,7 +32,7 @@ export class TaskComponent {
       Validators.maxLength(30),
     ]),
   });
-  isEditing: boolean = false;
+  isEditing = false;
 
   toggleEdit() {
     this.titleForm.setValue({ editTitle: this.task.title });
