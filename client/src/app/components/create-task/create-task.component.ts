@@ -19,7 +19,6 @@ export class CreateTaskComponent implements OnInit {
   constructor(private taskService: TaskService) {}
   ngOnInit(): void {}
 
-  @Output() formClosed = new EventEmitter<void>();
   @Output() taskCreated = new EventEmitter<any>();
   @Output() closePopup = new EventEmitter<void>();
 
