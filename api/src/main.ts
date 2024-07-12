@@ -12,7 +12,7 @@ async function bootstrap() {
   });
 
   const options = new DocumentBuilder()
-    .setTitle('BDEO Task Manager')
+    .setTitle('Task Manager')
     .setDescription('The task manager API description')
     .setVersion('1.0')
     .addTag('tasks')

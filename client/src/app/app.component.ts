@@ -9,5 +9,5 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'BDEO Task Management';
+  title = 'Task Management';
 }

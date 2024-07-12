@@ -6,7 +6,7 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   verbose: true,
   displayName: {
-    name: 'BDEO TASKS',
+    name: 'TASKS',
     color: 'cyan',
   },
   maxConcurrency: 1,

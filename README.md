@@ -1,10 +1,10 @@
-# BDEO Task Management
+# Task Management
 
-A simple task management application with a client built in Angular 18 and a backend developed using NestJS.
+A task management application with a client built in Angular 18 and a backend developed using NestJS.
 
 ## Introduction
 
-BDEO Task Management is a task management application that allows users to create, update, delete, and manage tasks in different states: to-do, in-progress, and done. The project consists of an Angular frontend and a NestJS backend.
+Task Management is a task management application that allows users to create, update, delete, and manage tasks in different states: to-do, in-progress, and done. The project consists of an Angular frontend and a NestJS backend.
 
 ## Features
 
@@ -33,8 +33,8 @@ BDEO Task Management is a task management application that allows users to creat
 Clone the repository and install the dependencies for both the client and backend:
 
 ```bash
-git clone https://github.com/pablokoll/bdeo-task-management.git
-cd bdeo-task-management
+git clone https://github.com/pablokoll/task-management.git
+cd task-management
 
 ```
 

@@ -1,6 +1,6 @@
-# BDEO Task Managment API (BACKEND)
+# Task Managment API (BACKEND)
 
-Simple task management application.
+Task management application.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -12,7 +12,7 @@ Simple task management application.
 
 
 ## Introduction
-The objective of this project is to create a simple task management application where users can add new tasks, view a list of tasks, update existing tasks, and delete tasks. Each task can exist in one of three states: to-do, in-progress, or done.
+The objective of this project is to create a task management application where users can add new tasks, view a list of tasks, update existing tasks, and delete tasks. Each task can exist in one of three states: to-do, in-progress, or done.
 
 The backend of the application is developed as a RESTful API, handling business logic and data persistence. It is built using TypeScript with the NestJS framework. The API implements CRUD endpoints for task management, ensuring proper request validation and error handling throughout.
 

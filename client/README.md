@@ -1,6 +1,6 @@
-# BDEO Task Management (FRONTEND)
+# Task Management (FRONTEND)
 
-BDEO Task Management is a task management application built with Angular 18.0.5. This application allows users to create, update, and delete tasks, as well as change their status through an intuitive user interface.
+Task Management is a task management application built with Angular 18.0.5. This application allows users to create, update, and delete tasks, as well as change their status through an intuitive user interface.
 
 ## Features
 - Task Management: Create, edit, delete, and change the status of tasks.
@@ -17,15 +17,14 @@ BDEO Task Management is a task management application built with Angular 18.0.5.
 
 Clone the repository:
 ```bash
-git clone https://github.com/pablokoll/bdeo-task-management.git
-cd bdeo-task-management
+git clone https://github.com/pablokoll/task-management.git
+cd task-management
 
 ```
 
 Install dependencies:
 ```bash
-git clone https://github.com/your/bdeo-task-management.git
-cd bdeo-task-management
+cd task-management
 npm install
 
 ```
